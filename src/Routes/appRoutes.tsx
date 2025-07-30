@@ -1,7 +1,8 @@
 // src/routes/AppRoutes.tsx
 import { Routes, Route } from 'react-router-dom';
 import { Login } from '../components/login/Login';
-import { Dashboard } from '../components/Dashboard/Dashboard';
+import { Dashboard } from '../components/Layout/Dashboard/Dashboard';
+import { HomeData } from '../components/HomeData/HomeData';
 
 const AppRoutes = () => {
   return (
@@ -9,9 +10,9 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Login />} />
 
-      <Route path="/home" element={<Dashboard />}>
-      {/* <Route index element={<Dashboard />} /> */}
-      {/* <Route path="orders" element={<Orders />} /> */}
+      <Route path="/app" element={<Dashboard />}>
+      <Route index element={<HomeData />} />
+
       </Route>
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>

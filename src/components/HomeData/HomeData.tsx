@@ -1,6 +1,8 @@
-
+import "./homeData.css";
 export const HomeData = () => {
   return (
-    <div>HomeData</div>
+    <section className="home-data">
+      maps and statistics will be rendered here!!!
+    </section>
   )
 }

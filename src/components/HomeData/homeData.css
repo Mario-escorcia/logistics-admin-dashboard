@@ -1,0 +1,6 @@
+.home-data{
+    height: 100%;
+    width: 100%;
+    background-color: var(--dark-bg);
+    color: var(--txt-color);
+}

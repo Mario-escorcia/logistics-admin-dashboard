@@ -17,7 +17,7 @@ export const Login = () => {
       let request = login(form);
       if(request?.responseCode === 200){
         if (saveUserDataInLocal(request.user) == 200) {
-          navigate('/home');
+          navigate('/app');
         }
       }
     }

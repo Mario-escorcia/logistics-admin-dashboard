@@ -1,8 +1,14 @@
+import { LineLayerMap } from "../Graphs/LineLayerMap/LineLayerMap";
 import "./homeData.css";
 export const HomeData = () => {
   return (
     <section className="home-data">
-      maps and statistics will be rendered here!!!
+     <div style={{
+      width : "30%",
+      height : "40%"
+     }}>
+      <LineLayerMap></LineLayerMap>
+     </div>
     </section>
   )
 }

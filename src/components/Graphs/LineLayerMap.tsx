@@ -3,7 +3,16 @@ import type { MapViewState } from "@deck.gl/core";
 import { LineLayer, ScatterplotLayer } from "@deck.gl/layers";
 import Map from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import {
+  setLineLayerAirports,
+  setLineLayerRoutes,
+} from "../../redux/Graphs/graphsSlice";
+import {
+  getLineLayerAirportsData,
+  getLineLayerRoutesData,
+} from "../../services/dashboardServices";
 
 const INITIAL_VIEW_STATE: MapViewState = {
   latitude: 51.5074,
@@ -17,23 +26,32 @@ const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
 
 export const LineLayerMap = () => {
-  const [routes, setRoutes] = useState<any[]>([]);
-  const [airports, setAirports] = useState<any[]>([]);
+  const routes = useAppSelector((state) => {
+    return state.graphs.lineLayerRoutes;
+  });
+  const airports = useAppSelector((state) => {
+    return state.graphs.lineLayerAirports;
+  });
+  const dispatch = useAppDispatch();
+
+  // functions
+  const getAirports = async () => {
+    let request = await getLineLayerAirportsData();
+    if (request.status == 200) {
+      dispatch(setLineLayerAirports(request.data));
+    }
+  };
+
+  const getRoutes = async () => {
+    let request = await getLineLayerRoutesData();
+    if (request.status == 200) {
+      dispatch(setLineLayerRoutes(request.data));
+    }
+  };
 
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/line/heathrow-flights.json"
-    )
-      .then((res) => res.json())
-      .then(setRoutes)
-      .catch(console.error);
-
-    fetch(
-      "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/line/airports.json"
-    )
-      .then((res) => res.json())
-      .then(setAirports)
-      .catch(console.error);
+    getRoutes();
+    getAirports();
   }, []);
 
   const layers = [
@@ -47,7 +65,7 @@ export const LineLayerMap = () => {
         const r = z / 10000;
         return [255 * (1 - r * 2), 128 * r, 255 * r, 255 * (1 - r)];
       },
-      getWidth: 1,
+      getWidth: 2,
       pickable: true,
     }),
     new ScatterplotLayer({
@@ -70,7 +88,7 @@ export const LineLayerMap = () => {
     >
       <DeckGL
         initialViewState={INITIAL_VIEW_STATE}
-        controller={false}
+        controller={true}
         layers={layers}
       >
         <Map mapStyle={MAP_STYLE} />

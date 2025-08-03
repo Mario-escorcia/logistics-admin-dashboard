@@ -1,23 +1,15 @@
 import { AiOutlineDropbox, AiOutlineUser } from "react-icons/ai";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { VscError } from "react-icons/vsc";
-import { LineLayerMap } from "../Graphs/LineLayerMap/LineLayerMap";
-import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
+import { LineLayerMap } from "../Graphs/LineLayerMap";
 import "./homeData.css";
+import { GaugeChart } from "../Graphs/GaugeChart";
+import { LineChartComponent } from "../Graphs/LineChartComponent";
 
 export const HomeData = () => {
   const generateRadomNumber = () => {
     const number: number = Math.ceil(Math.random() * 1000);
     return number;
-  };
-  const generateRadomProfitNumber = () => {
-    const number: number = Math.ceil(Math.random() * 100);
-    return number;
-  };
-
-  const gaugeSettings = {
-    width: 250,
-    height: 250,
   };
 
   return (
@@ -117,7 +109,7 @@ export const HomeData = () => {
         <div
           style={{
             width: "75%",
-            padding : "0"
+            padding: "0",
           }}
         >
           <p>Live Shipment Tracking</p>
@@ -131,21 +123,7 @@ export const HomeData = () => {
           <p>profit margin</p>
 
           <div>
-            <Gauge
-              {...gaugeSettings}
-              value={generateRadomProfitNumber()}
-              sx={{
-                ["& .MuiGauge-valueText"]: {
-                  fontSize: 40,
-                  transform: "translate(0px, 0px)",
-                  fill: "var(--txt-color) !important",
-                },
-                [`& .${gaugeClasses.valueArc}`]: {
-                  fill: "var(--purple)",
-                },
-              }}
-              text={({ value }) => `${value}%`}
-            />
+            <GaugeChart></GaugeChart>
           </div>
         </div>
       </section>
@@ -153,9 +131,13 @@ export const HomeData = () => {
         <div
           style={{
             width: "35%",
+            paddingBottom : ".6rem 0 0 0"
           }}
         >
-          error sumary
+          <p>shipment error summary</p>
+          <div>
+            <LineChartComponent/>
+          </div>
         </div>
         <div
           style={{

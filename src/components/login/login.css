@@ -69,7 +69,7 @@
 }
 
 .login-form-inp-cont>input {
-    height: 3.3rem;
+    height: 3rem;
     padding: .6rem;
     border-radius: .5rem;
         border: 1px solid #4d485a;
@@ -86,7 +86,7 @@
 .login-lg-btn {
     width: 75%;
     min-width: 10rem;
-    height: 3.3rem;
+    height: 3rem;
     border-radius: .5rem;
     cursor: pointer;
     background-color: #6d54b5;
@@ -98,7 +98,7 @@
 .login-google-btn {
     width: 75%;
     min-width: 10rem;
-    height: 3.3rem;
+    height: 3rem;
     border-radius: .5rem;
     cursor: pointer;
     background-color: #fff;
@@ -117,18 +117,18 @@
 }
 
 .login-label-separator-cont {
-    width: 70%;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: .8rem;
-    gap: .5rem;
+    font-size: var(--txt-size);
+    gap: .4rem;
     color: #fff;
     font-weight: 500;
 }
 
 .login-label-separator-cont>span {
-    height: 1px;
+    height: .1rem;
     width: 30%;
     background-color: #4d485a;
 

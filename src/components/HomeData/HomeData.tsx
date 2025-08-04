@@ -5,6 +5,7 @@ import { LineLayerMap } from "../Graphs/LineLayerMap";
 import "./homeData.css";
 import { GaugeChart } from "../Graphs/GaugeChart";
 import { LineChartComponent } from "../Graphs/LineChartComponent";
+import { ShipmentsTable } from "../Tables/ShipmentsTable";
 
 export const HomeData = () => {
   const generateRadomNumber = () => {
@@ -144,7 +145,9 @@ export const HomeData = () => {
             width: "65%",
           }}
         >
-          recent shipments
+          <p>Recent shipements</p>
+
+          <ShipmentsTable/>
         </div>
       </section>
     </section>

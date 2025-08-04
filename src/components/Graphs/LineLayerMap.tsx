@@ -65,7 +65,7 @@ export const LineLayerMap = () => {
         const r = z / 10000;
         return [255 * (1 - r * 2), 128 * r, 255 * r, 255 * (1 - r)];
       },
-      getWidth: 2,
+      getWidth: 1,
       pickable: true,
     }),
     new ScatterplotLayer({

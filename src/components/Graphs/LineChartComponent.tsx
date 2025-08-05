@@ -26,13 +26,13 @@ export const LineChartComponent = () => {
       // margin={0}
       sx={{
         "& .MuiChartsAxis-line": {
-          stroke: "var(--txt-color)",
+          stroke: "var(--white) !important",
         },
         "& .MuiChartsAxis-tick": {
-          stroke: "var(--txt-color)",
+          stroke: "var(--white) !important",
         },
         "& .MuiChartsAxis-tickLabel":{
-          fill : "var(--txt-color)"
+          fill : "var(--white) !important"
         }
       }}
     />

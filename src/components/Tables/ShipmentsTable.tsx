@@ -16,31 +16,54 @@ export const ShipmentsTable = () => {
         pageSizeOptions={[5, 10]}
         checkboxSelection={false}
         sx={{
-          backgroundColor: "var(--dark-grey)", 
-          border : "none",
+          backgroundColor: "var(--dark-grey)",
+          border: "none",
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: "var(--dark-grey)",
             color: "#fff",
-            flexGrow : "1"
+            width : "21% !important",
           },
-          "& .MuiDataGrid-filler" : {
-            display : "none"
+          "& .MuiDataGrid-filler": {
+            display: "none",
           },
           "& .MuiDataGrid-columnHeaderTitle": {
-            color: "#fff", 
+            color: "#fff",
           },
           "& .MuiSvgIcon-root": {
             fill: "#fff",
           },
-          "& .MuiDataGrid-row":{
-            background : "var(--dark-grey)",
-            cursor : "pointer"
+          "& .MuiDataGrid-row": {
+            background: "var(--dark-grey)",
+            cursor: "pointer",
           },
-          "& .MuiTablePagination-displayedRows" : {
+          "& .MuiDataGrid-cell": {
+            color : "var(--white)",
+            width : "21% !important",
+
+          },
+          "& .MuiDataGrid-cell--textRight":{
+            textAlign : "start"
+          },
+          "& .MuiDataGrid-row:hover" : {
+            background : "var(--dark-grey)"
+          },
+          "& .MuiTablePagination-displayedRows": {
+            color: "var(--white)",
+          },
+          "& .MuiTablePagination-selectLabel": {
+            color: "var(--white)",
+          },
+          "& .MuiDataGrid-scrollbarFiller" : {
+            display : "none",
+          },
+          "& .css-15lx25q-MuiDataGrid-footerContainer" :{
+            minHeight : "1.95rem"
+          },
+          "& .css-18zjd9i-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input":{
             color : "var(--white)"
           },
-          "& .MuiTablePagination-selectLabel" : {
-            color : "var(--white)"
+          "& .css-yseucu-MuiDataGrid-columnHeaderRow" :{
+            height : "1.65rem !important"
           }
         }}
       />

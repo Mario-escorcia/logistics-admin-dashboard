@@ -147,7 +147,9 @@ export const HomeData = () => {
         >
           <p>Recent shipements</p>
 
-          <ShipmentsTable/>
+          <div>
+            <ShipmentsTable/>
+          </div>
         </div>
       </section>
     </section>

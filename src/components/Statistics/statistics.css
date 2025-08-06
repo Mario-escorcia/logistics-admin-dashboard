@@ -1,0 +1,36 @@
+.statistics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  background-color: aqua;
+  height: 100%;
+  gap: var(--gap);
+  padding: var(--padding);
+}
+.statistics > div {
+  background-color: var(--dark-grey);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  position: relative;
+}
+.statistics > div > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statistics > div > p {
+  color: var(--txt-color);
+  font-size: calc(var(--subtitle-size) - 0.1rem);
+  font-weight: 400;
+  position: absolute;
+  left: calc(0 + var(--padding));
+  top: calc(0 + var(--padding));
+}
+
+.KPI-container {
+  grid-column: 2; /* ← ocupa columna 3 y 4 */
+  grid-row: 1 / 3;
+}

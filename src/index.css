@@ -23,6 +23,7 @@
   --radius: 0.4rem;
   --glass-bg: rgba(255, 255, 255, 0.167);
   --transition: all 0.3s ease-in-out;
+  --padding : .5rem;
 
   font-size: clamp(2vh, 2.61vh, 5vh);
 }

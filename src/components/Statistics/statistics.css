@@ -2,10 +2,10 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  background-color: aqua;
   height: 100%;
   gap: var(--gap);
   padding: var(--padding);
+  background-color: var(--dark-bg);
 }
 .statistics > div {
   background-color: var(--dark-grey);

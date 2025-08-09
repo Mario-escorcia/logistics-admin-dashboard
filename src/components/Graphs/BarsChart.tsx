@@ -6,10 +6,10 @@ export const BarsChart = () => {
   function valueFormatter(value: number | null) {
     let result: number;
     if (value) {
-        let biggerNumber = value * 100;
-     result =  Math.ceil(Math.random() * biggerNumber);
-    }else{
-        result = Math.ceil(Math.random() * 100); 
+      let biggerNumber = value * 100;
+      result = Math.ceil(Math.random() * biggerNumber);
+    } else {
+      result = Math.ceil(Math.random() * 100);
     }
     return `$ ${result}`;
   }
@@ -21,7 +21,8 @@ export const BarsChart = () => {
       }}
     >
       <BarChart
-      allowReorder="yes"
+        hideLegend={true}
+        allowReorder="yes"
         dataset={dataSet}
         xAxis={[{ dataKey: "month" }]}
         series={[

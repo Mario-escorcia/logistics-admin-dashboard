@@ -1,4 +1,4 @@
-import { RadarChart, ScatterChart, type RadarSeriesType } from "@mui/x-charts";
+import {ScatterChart} from "@mui/x-charts";
 const dataset = [
   {
     version: "data-0",
@@ -106,8 +106,9 @@ export const ScatterChartComponent = () => {
             color: "var(--white)",
           },
           "& .MuiChartsAxis-label" : {
-            fill : "var(--white)"
-          }
+            fill : "var(--white) !important"
+          },
+        
         }}
         dataset={dataset}
         series={[

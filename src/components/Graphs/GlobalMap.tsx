@@ -129,7 +129,7 @@ export const GlobalMap = () => {
   );
 
   return (
-    <section style={{ height: "100%", width: "100%", background: data.length > 0 ? "var(--dark-bg)" : "var(--white)" }}>
+    <section style={{ height: "100%", width: "100%", background: "var(--dark-bg)" }}>
       <Map
         reuseMaps
         projection="globe"

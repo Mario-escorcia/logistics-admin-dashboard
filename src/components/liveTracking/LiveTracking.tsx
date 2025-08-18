@@ -1,5 +1,6 @@
 import { GlobalMap } from "../Graphs/GlobalMap";
 import { LineLayerMap } from "../Graphs/LineLayerMap";
+import { TripsLayerComponent } from "../Graphs/TripsLayer";
 import "./LiveTracking.css";
 
 export const LiveTracking = () => {
@@ -14,16 +15,14 @@ export const LiveTracking = () => {
 
         <GlobalMap></GlobalMap>
       </div>
-      <div>
-        <p>lorem ipsum</p>
+      <div style={{
+        gridColumn : "span 2"
+      }}>
+        <p>Users that are using our GPS hardware in real time</p>
 
-        <LineLayerMap></LineLayerMap>
+        <TripsLayerComponent></TripsLayerComponent>
       </div>
-      <div>
-        <p>lorem ipsum</p>
-
-        <LineLayerMap></LineLayerMap>
-      </div>
+      
     </section>
   );
 };

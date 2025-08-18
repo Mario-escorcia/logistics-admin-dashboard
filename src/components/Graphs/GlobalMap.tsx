@@ -1,12 +1,10 @@
 import Map, { useControl, useMap, type ViewState } from "react-map-gl/maplibre";
 import { MapboxOverlay as DeckOverlay } from "@deck.gl/mapbox";
-import { useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { environment } from "../../environment/environment";
-import { createRoot } from "react-dom/client";
 import { load } from "@loaders.gl/core";
 import { CSVLoader } from "@loaders.gl/csv";
 import AnimatedArcLayer from "./Animated-arc-layer";
-import RangeInput from "./range-input";
 
 const INITIAL_VIEW_STATE: ViewState = {
   longitude: 90,

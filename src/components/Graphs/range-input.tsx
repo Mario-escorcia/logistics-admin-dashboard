@@ -39,13 +39,13 @@ export default function RangeInput({
   value,
   animationSpeed,
   onChange,
-  formatLabel
+  // formatLabel
 }: {
   min: number;
   max: number;
   value: number;
   animationSpeed: number;
-  formatLabel: (x: number) => string;
+  // formatLabel: (x: number) => string;
   onChange: (newValue: number) => void;
 }) {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -82,7 +82,7 @@ export default function RangeInput({
         value={value}
         onChange={(event : any, newValue : any) => onChange(newValue as number)}
         valueLabelDisplay="on"
-        valueLabelFormat={formatLabel}
+        // valueLabelFormat={formatLabel}
       />
     </PositionContainer>
   );

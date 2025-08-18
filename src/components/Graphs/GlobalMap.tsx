@@ -17,8 +17,8 @@ const INITIAL_VIEW_STATE: ViewState = {
   padding: { top: 0, bottom: 0, left: 0, right: 0 },
 };
 
-const ANIMATION_SPEED = 60;
-const TIME_WINDOW = 1800;
+const ANIMATION_SPEED = 50;
+const TIME_WINDOW = 1900;
 const SEC_PER_DAY = 60 * 60 * 24;
 
 type Flight = {
@@ -40,52 +40,15 @@ type DailyFlights = {
   flights: Flight[];
 };
 
-export async function renderToDOM(container: HTMLDivElement) {
-  const root = createRoot(container);
-  root.render(<GlobalMap />);
 
-  const dates = [
-    "2020-01-14",
-    "2020-02-11",
-    "2020-03-10",
-    "2020-04-14",
-    "2020-05-12",
-    "2020-06-09",
-    "2020-07-14",
-    "2020-08-11",
-    "2020-09-08",
-    "2020-10-13",
-    "2020-11-10",
-    "2020-12-08",
-  ];
 
-  const data: DailyFlights[] = [];
-  for (const date of dates) {
-    const url = `${environment.globalMapDataSource}/${date}.csv`;
-    const flights: Flight[] = (
-      await load(url, CSVLoader, { csv: { skipEmptyLines: true } })
-    ).data as Flight[];
-
-    console.log("Flights loaded:", flights.length, "for", date);
-
-    // Join flight data from multiple dates into one continuous animation
-    const offset = SEC_PER_DAY * data.length;
-    for (const f of flights) {
-      f.time1 += offset;
-      f.time2 += offset;
-    }
-
-    data.push({ flights, date });
-    root.render(<GlobalMap data={data} />);
-  }
-}
-
-function getDate(data: DailyFlights[], t: number) {
-  const index = Math.min(data.length - 1, Math.floor(t / SEC_PER_DAY));
-  const date = data[index].date;
-  const timestamp = new Date(`${date}T00:00:00Z`).getTime() + (t % SEC_PER_DAY) * 1000;
-  return new Date(timestamp);
-}
+// function getDate(data: DailyFlights[], t: number) {
+//   const index = Math.min(data.length - 1, Math.floor(t / SEC_PER_DAY));
+//   console.log(data)
+//   const date = data[index].date;
+//   const timestamp = new Date(`${date}T00:00:00Z`).getTime() + (t % SEC_PER_DAY) * 1000;
+//   return new Date(timestamp);
+// }
 
 function DeckGLOverlay(props: any) {
   const overlay = useControl(() => new DeckOverlay(props));
@@ -101,58 +64,72 @@ function DeckGLOverlay(props: any) {
   return null;
 }
 
-export const GlobalMap = ({
-  data = [],
-}: {
-  data?: DailyFlights[];
-}) => {
+export const GlobalMap = () => {
+  const [data, setData] = useState<DailyFlights[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
+
   const timeRange: [number, number] = [currentTime, currentTime + TIME_WINDOW];
 
-  const layers =
-    data?.map(
-      ({ date, flights }) =>
-        new AnimatedArcLayer<Flight>({
-          id: `flights-${date}`,
-          data: flights,
-          getSourcePosition: (d) => [d.lon1, d.lat1, d.alt1],
-          getTargetPosition: (d) => [d.lon2, d.lat2, d.alt2],
-          getSourceTimestamp: (d) => d.time1,
-          getTargetTimestamp: (d) => d.time2,
-          getHeight: 0.3,
-          getWidth: 2,
-          timeRange,
-          getSourceColor: [63, 81, 181],
-          getTargetColor: [63, 181, 173],
-          parameters: { cullMode: "none" },
-          // antes usabas beforeId, mejor quitarlo por compatibilidad
-        })
-    ) ?? [];
-
-  // Animación del tiempo
+  // cargar CSVs aquí
   useEffect(() => {
-    if (!data) return;
+    const loadData = async () => {
+      const dates = [
+        "2020-01-14","2020-02-11","2020-03-10","2020-04-14","2020-05-12",
+        "2020-06-09","2020-07-14","2020-08-11","2020-09-08","2020-10-13",
+        "2020-11-10","2020-12-08"
+      ];
+
+      const loaded: DailyFlights[] = [];
+      for (const date of dates) {
+        const url = `${environment.globalMapDataSource}/${date}.csv`;
+        const flights: Flight[] = (
+          await load(url, CSVLoader, { csv: { skipEmptyLines: true } })
+        ).data as Flight[];
+
+        // offset para animación continua
+        const offset = SEC_PER_DAY * loaded.length;
+        flights.forEach(f => {
+          f.time1 += offset;
+          f.time2 += offset;
+        });
+
+        loaded.push({ flights, date });
+      }
+      setData(loaded);
+    };
+
+    loadData();
+  }, []);
+
+  // animación del tiempo
+  useEffect(() => {
+    if (!data.length) return;
     const interval = setInterval(() => {
-      setCurrentTime(
-        (t) => (t + ANIMATION_SPEED) % (data.length * SEC_PER_DAY)
-      );
+      setCurrentTime(t => (t + ANIMATION_SPEED) % (data.length * SEC_PER_DAY));
     }, 100);
 
     return () => clearInterval(interval);
   }, [data]);
 
-   const formatLabel = useCallback((t: number) => getDate(data ? data : [], t).toUTCString(), [data]);
-
-  console.log("Rendering layers:", layers);
+  const layers = data.map(({ date, flights }) =>
+    new AnimatedArcLayer<Flight>({
+      id: `flights-${date}`,
+      data: flights,
+      getSourcePosition: d => [d.lon1, d.lat1, d.alt1],
+      getTargetPosition: d => [d.lon2, d.lat2, d.alt2],
+      getSourceTimestamp: d => d.time1,
+      getTargetTimestamp: d => d.time2,
+      getHeight: 0.3,
+      getWidth: 1,
+      timeRange,
+      getSourceColor: [63, 81, 181],
+      getTargetColor: [63, 181, 173],
+      parameters: { cullMode: "none" },
+    })
+  );
 
   return (
-    <section
-      style={{
-        height: "100%",
-        width: "100%",
-        background: "var(--dark-bg)",
-      }}
-    >
+    <section style={{ height: "100%", width: "100%", background: data.length > 0 ? "var(--dark-bg)" : "var(--white)" }}>
       <Map
         reuseMaps
         projection="globe"
@@ -165,16 +142,17 @@ export const GlobalMap = ({
         <DeckGLOverlay layers={layers} interleaved />
       </Map>
 
-      data && (
+      {/* {data.length > 0 && (
         <RangeInput
           min={0}
           max={data.length * SEC_PER_DAY}
           value={currentTime}
           animationSpeed={ANIMATION_SPEED}
-          formatLabel={formatLabel}
           onChange={setCurrentTime}
         />
-      )
+      )} */}
     </section>
   );
 };
+
+

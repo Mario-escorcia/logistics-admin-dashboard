@@ -10,7 +10,7 @@ export const LiveTracking = () => {
         <LineLayerMap></LineLayerMap>
       </div>
       <div>
-        <p>lorem ipsum</p>
+        <p>Global Flights made until today</p>
 
         <GlobalMap></GlobalMap>
       </div>

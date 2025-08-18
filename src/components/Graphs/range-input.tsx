@@ -24,7 +24,7 @@ const PositionContainer = styled('div')({
   alignItems: 'center'
 });
 
-const SliderInput = styled(Slider)(({ theme }) => ({
+const SliderInput = styled(Slider)(() => ({
   marginLeft: 12,
   width: '40%',
   '& .MuiSlider-valueLabel': {
@@ -80,7 +80,7 @@ export default function RangeInput({
         min={min}
         max={max}
         value={value}
-        onChange={(event : any, newValue : any) => onChange(newValue as number)}
+        onChange={( newValue : any) => onChange(newValue as number)}
         valueLabelDisplay="on"
         // valueLabelFormat={formatLabel}
       />

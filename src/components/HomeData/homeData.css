@@ -53,7 +53,7 @@
   justify-content: center;
   align-items: end;
   color: var(--txt-color);
-  font-size: calc(var(--txt-size) + 0.5rem);
+  font-size: calc(var(--txt-size) + 0.1rem);
 }
 
 .home-data-cont-top > div > div > span > p {
@@ -67,7 +67,8 @@
   border-radius: var(--radius);
 }
 .home-data-cont-middle {
-  height: 44%;
+  /* height: 44%; */
+  flex-grow: 1;
   width: 100%;
   display: flex;
   gap: var(--gap);

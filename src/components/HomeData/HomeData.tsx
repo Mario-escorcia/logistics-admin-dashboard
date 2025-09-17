@@ -3,12 +3,13 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { VscError } from "react-icons/vsc";
 import { LineLayerMap } from "../Graphs/LineLayerMap";
 import "./homeData.css";
-import { GaugeChart } from "../Graphs/GaugeChart";
-import { LineChartComponent } from "../Graphs/LineChartComponent";
-import { ShipmentsTable } from "../Tables/ShipmentsTable";
+// import { GaugeChart } from "../Graphs/GaugeChart";
+// import { LineChartComponent } from "../Graphs/LineChartComponent";
+// import { ShipmentsTable } from "../Tables/ShipmentsTable";
 
 export const HomeData = () => {
-  const generateRadomNumber = () => {
+  
+  const generateRadomNumber = (): number => {
     const number: number = Math.ceil(Math.random() * 1000);
     return number;
   };
@@ -109,14 +110,14 @@ export const HomeData = () => {
       <section className="home-data-cont-middle">
         <div
           style={{
-            width: "75%",
+            width: "100%",
             padding: "0",
           }}
         >
           <p>Live Shipment Tracking</p>
           <LineLayerMap></LineLayerMap>
         </div>
-        <div
+        {/* <div
           style={{
             width: "25%",
           }}
@@ -126,18 +127,18 @@ export const HomeData = () => {
           <div>
             <GaugeChart></GaugeChart>
           </div>
-        </div>
+        </div> */}
       </section>
-      <section className="home-data-cont-bottom">
+      {/* <section className="home-data-cont-bottom">
         <div
           style={{
             width: "35%",
-            paddingBottom : ".6rem 0 0 0"
+            paddingBottom: ".6rem 0 0 0",
           }}
         >
           <p>shipment error summary</p>
           <div>
-            <LineChartComponent/>
+            <LineChartComponent />
           </div>
         </div>
         <div
@@ -148,10 +149,10 @@ export const HomeData = () => {
           <p>Recent shipements</p>
 
           <div>
-            <ShipmentsTable/>
+            <ShipmentsTable />
           </div>
         </div>
-      </section>
+      </section> */}
     </section>
   );
 };
